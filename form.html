@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sertifika Talep Formu</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- xlsx CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+  
+</head>
+<body>
+  <header>
+    <form id="myForm">
+      <h2>Kayıt Formu</h2>
+
+      <label for="isim">İsim:</label>
+      <input type="text" id="isim" name="isim">
+
+      <label for="soyisim">Soyisim:</label>
+      <input type="text" id="soyisim" name="soyisim">
+
+      <label for="uyruk">Uyruk:</label>
+      <input type="text" id="uyruk" name="uyruk">
+
+      <label for="kimlikNo">Kimlik Numarası:</label>
+      <input type="text" id="kimlikNo" name="kimlikNo">
+
+      <label for="dogumTarihi">Doğum Tarihi:</label>
+      <input type="text" id="dogumTarihi" name="dogumTarihi">
+
+      <label for="sinavSonucu">Sınav Sonucu:</label>
+      <input type="text" id="sinavSonucu" name="sinavSonucu">
+
+      <label for="basariDurumu">Başarı Durumu:</label>
+      <input type="text" id="basariDurumu" name="basariDurumu">
+
+      <label for="egitimBilgisi">Eğitim İsmi ve Saati:</label>
+      <input type="text" id="egitimBilgisi" name="egitimBilgisi" list="egitimListesi">
+      <datalist id="egitimListesi">
+        <option value="(HO RE KA) SERVİS PERSONELİ (GARSON) YETİŞTİRME 120 SAAT">
+        <option value="0-72 AY ÇOCUK GELİŞİMİ 180 SAAT">
+        <option value="0-72 AY ÇOCUK GELİŞİMİ 180 SAAT">
+        <option value="0-72 AY ÇOCUK GELİŞİMİ 180 SAAT">
+        <option value="0-72 AY ÇOCUK GELİŞİMİ EĞİTİMİ 180 SAAT">
+      </datalist>
+
+      <label for="egitimBaslangic">Eğitim Başlangıç Tarihi:</label>
+      <input type="text" id="egitimBaslangic" name="egitimBaslangic">
+
+      <label for="egitimBitis">Eğitim Bitiş Tarihi:</label>
+      <input type="text" id="egitimBitis" name="egitimBitis">
+
+      <label for="universite">Üniversite:</label>
+      <input type="text" id="universite" name="universite">
+
+      <label for="uluslararasiSertifika">Uluslararası Sertifika Olacak mı ?:</label>
+      <select id="uluslararasiSertifika" name="uluslararasiSertifika">
+        <option value="Evet">Evet</option>
+        <option value="Hayir">Hayır</option>
+      </select>
+
+      <label for="mailAdresi">Mail Adresi:</label>
+      <input type="text" id="mailAdresi" name="mailAdresi">
+
+      <label for="telefonNumarasi">Telefon Numarası:</label>
+      <input type="text" id="telefonNumarasi" name="telefonNumarasi">
+
+      <button type="button" onclick="addData()" class="veri-ekle">Veri Ekle</button>
+      <button type="button" onclick="exportToExcel()" class="excele-aktar">Excel'e Aktar</button>
+    </form>
+  </header>  
+  <script>
+    var formData = [];
+
+    function addData() {
+      var sira = formData.length + 1;
+      var isim = document.getElementById('isim').value;
+      var soyisim = document.getElementById('soyisim').value;
+      var uyruk = document.getElementById('uyruk').value;
+      var kimlikNo = document.getElementById('kimlikNo').value;
+      var dogumTarihi = document.getElementById('dogumTarihi').value;
+      var sinavSonucu = document.getElementById('sinavSonucu').value;
+      var basariDurumu = document.getElementById('basariDurumu').value;
+      var egitimBilgisi = document.getElementById('egitimBilgisi').value;
+      var egitimBaslangic = document.getElementById('egitimBaslangic').value;
+      var egitimBitis = document.getElementById('egitimBitis').value;
+      var universite = document.getElementById('universite').value;
+      var uluslararasiSertifika = document.getElementById('uluslararasiSertifika').value;
+      var mailAdresi = document.getElementById('mailAdresi').value;
+      var telefonNumarasi = document.getElementById('telefonNumarasi').value;
+
+      formData.push([
+        sira, isim, soyisim, uyruk, kimlikNo, dogumTarihi, sinavSonucu,
+        basariDurumu, egitimBilgisi, egitimBaslangic, egitimBitis,
+        universite, uluslararasiSertifika, mailAdresi, telefonNumarasi
+      ]);
+
+      document.getElementById('myForm').reset();
+    }
+
+    function exportToExcel() {
+      var wb = XLSX.utils.book_new();
+      var ws = XLSX.utils.aoa_to_sheet([
+        ['SIRA', 'İsim', 'Soyisim', 'Uyruk', 'Kimlik Numarası', 'Doğum Tarihi', 'Sınav Sonucu',
+         'Başarı Durumu', 'Eğitim İsmi ve Saati', 'Eğitim Başlangıç Tarihi', 'Eğitim Bitiş Tarihi',
+         'Üniversite', 'Uluslararası Sertifika Olacak mı ?', 'Mail Adresi', 'Telefon Numarası'],
+        ...formData
+      ]);
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+      XLSX.writeFile(wb, 'sertifika-talep-formu.xlsx');
+    }
+  </script>
+</body>
+</html>

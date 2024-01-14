@@ -1,0 +1,65 @@
+    body { 
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 800px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      grid-column: span 4;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      grid-column: span 4;
+    }
+    .veri-ekle {
+      color: white;
+      background-color: #ff6600;
+      
+    }
+    .excele-aktar {
+      color: white;
+      background-color: green;
+    }
+
+    button:hover {
+      background-color: #bdbbc4; /* mavi hover rengi */
+      color: green;
+    }
